@@ -5,7 +5,7 @@
 if status -i
 
   # https://fishshell.com/docs/current/index.html#title
-  function fish_title --description 'set the message displayed in the titlebar of the terminal window'
+  function fish_title --description='set the message displayed in the titlebar of the terminal window'
     if test $_ != 'fish'
       echo $_ ' '
     end

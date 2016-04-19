@@ -16,6 +16,12 @@ begin
   end
 end
 
+# Set the Less colorizer.
+begin
+  set -l pygmentize (command -s pygmentize)
+  set -g -x LESSCOLORIZER 'pygmentize'
+end
+
 # Make man colorful.
 # http://unix.stackexchange.com/questions/108699/documentation-on-less-termcap-variables
 set -g -x LESS_TERMCAP_mb \e'[01;31m'      # Begins blinking.

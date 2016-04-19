@@ -29,9 +29,12 @@ set -g -x PAGER 'less'
 
 
 # paths
-set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
+set -g -x PATH ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
 set -g -x PATH (listutil rmdup $PATH)
 
 
 # fishbowl modules want to load
-set -g fishbowl_modules pager terminal dots
+set -g fishbowl_modules pager terminal dots \
+                        builtin-python2 \
+                        brewed-python3 \
+                        brewed-node

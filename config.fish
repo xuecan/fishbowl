@@ -5,14 +5,14 @@
 set -g fishbowl_basedir (dirname (status -f))
 
 # reload this config file
-function reload_config --description 'reload this config file'
+function reload-config --description='reload this config file'
   set -l filename (status -f)
   source $filename
   echo '"'$filename'" reloaded.'
 end
 
 # load fishbowl module
-function fishbowl_load_module --description 'load fishbowl module'
+function fishbowl_load_module --description='load fishbowl module'
   for modulename in $argv
     set -l filename "$fishbowl_basedir/fishbowl/$modulename.fish"
     source $filename
