@@ -6,7 +6,7 @@
 
 """fishbowl list utilities"""
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 
 
 import sys
@@ -86,6 +86,14 @@ def sort(type, items):
         sys.stderr.write(err.args[0])
         sys.exit(2)
     result.sort()
+    _echo(_slice(result))
+
+
+@main.command()
+@click.argument('items', nargs=-1)
+def sliced(items):
+    """slice ITEMS"""
+    result = list(items)
     _echo(_slice(result))
 
 
