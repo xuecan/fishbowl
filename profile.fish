@@ -29,6 +29,12 @@ set -g -x PAGER 'less'
 
 
 # paths
+if not test -e "$HOME/.local"
+  echo-and-eval mkdir "$HOME/.local"
+end
+if not test -e "$HOME/.local/bin"
+  echo-and-eval mkdir "$HOME/.local/bin"
+end
 set -g -x PATH ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
 set -g -x PATH (listutil rmdup $PATH)
 
