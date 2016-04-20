@@ -1,8 +1,16 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
+
+# session id
+if test -z "$fishbow_session_id"
+  set -g fishbow_session_id (uuidgen)
+end
+
+
 # this directory
 set -g fishbowl_basedir (dirname (status -f))
+
 
 # reload this config file
 function reload-config --description='reload this config file'
@@ -10,6 +18,7 @@ function reload-config --description='reload this config file'
   source $filename
   echo '"'$filename'" reloaded.'
 end
+
 
 # load fishbowl module
 function fishbowl_load_module --description='load fishbowl module'
@@ -19,10 +28,10 @@ function fishbowl_load_module --description='load fishbowl module'
   end
 end
 
+
+# default modules
+fishbowl_load_module pager terminal directories
+
+
 # load profile.fish
 source "$fishbowl_basedir/profile.fish"
-
-# load modules
-for modulename in $fishbowl_modules
-  fishbowl_load_module $modulename
-end

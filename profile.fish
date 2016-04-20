@@ -29,18 +29,14 @@ set -g -x PAGER 'less'
 
 
 # paths
-if not test -e "$HOME/.local"
-  echo-and-eval mkdir "$HOME/.local"
+set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
+if test -d "$HOME/.local/bin"
+  set -g -x PATH $HOME/.local/bin $PATH
 end
-if not test -e "$HOME/.local/bin"
-  echo-and-eval mkdir "$HOME/.local/bin"
-end
-set -g -x PATH ~/.local/bin /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
 set -g -x PATH (listutil rmdup $PATH)
 
 
-# fishbowl modules want to load
-set -g fishbowl_modules pager terminal dots \
-                        builtin-python2 \
-                        brewed-python3 \
-                        brewed-node
+# extra modules
+fishbowl_load_module builtin_python2
+fishbowl_load_module brewed_python3
+fishbowl_load_module brewed_node
