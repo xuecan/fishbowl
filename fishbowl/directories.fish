@@ -20,20 +20,19 @@ end
 
 function d --description='list recently visited directories'
   set -l num (count $fishbowl_dir_history)
-  if test $num -lt 2
-    return 0
-  end
-  set -l tmp
   set -l realhome ~
-  set -l index (math $num - 1)
-  for item in $fishbowl_dir_history[-1..2]
-    echo -n '  '
-    set_color green; echo -n $index; echo -n ': '; set_color normal
-    echo $item | sed -e "s|^$realhome|~|"
-    set index (math $index - 1)
+  set -l tmp
+  if test $num -gt 1
+    set -l index (math $num - 1)
+    for item in $fishbowl_dir_history[-1..2]
+      echo -n '  '
+      set_color green; echo -n $index; echo -n ': '; set_color normal
+      echo $item | sed -e "s|^$realhome|~|" $tmp
+      set index (math $index - 1)
+    end
   end
   set_color green; echo -n 'PWD: '; set_color normal
-  echo $fishbowl_dir_history[1] | sed -e "s|^$realhome|~|"
+  echo $fishbowl_dir_history[1] | sed -e "s|^$realhome|~|" $tmp
 end
 
 
