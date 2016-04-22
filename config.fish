@@ -2,6 +2,7 @@
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
 
+
 # session id
 if test -z "$fishbow_session_id"
   set -g fishbow_session_id (uuidgen)
