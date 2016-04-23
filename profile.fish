@@ -40,4 +40,5 @@ set -g -x PATH (listutil rmdup $PATH)
 fishbowl_load_module builtin_python2
 fishbowl_load_module brewed_python3
 fishbowl_load_module brewed_node
+fishbowl_load_module greeting
 fishbowl_load_module prompt

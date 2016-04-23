@@ -1,10 +1,6 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
-set -l tmp '
-┏-[username@hostname:~/path/to/here]~«git*»
-┗-[🐍 PY3]-[jobs 2]→ $                                             ❪ 1.024s 0• ⏎
-'
 
 set -g fishbowl_color_sep_root 870000
 set -g fishbowl_color_sep_user 005f5f
@@ -36,6 +32,7 @@ function prompt_pwd --description 'Print the current working directory, shortene
   set -l realhome ~
   echo $PWD | sed -e "s|^$realhome|~|" $args_pre -e 's-\([^/.]\)[^/]{3}/-\1/-g' $args_post
 end
+
 
 function fish_prompt
   set -g -x VIRTUAL_ENV_DISABLE_PROMPT 1
@@ -81,11 +78,11 @@ function fish_prompt
   set -l vcs (_prompt_svn_info)
   if test -n "$vcs"
     set_color normal; set_color $color_sep
-    printf '-<'
+    printf '-{'
     set_color $fishbowl_color_vcs
     printf '%s' $vcs
     set_color normal; set_color $color_sep
-    printf '>'
+    printf '}'
   end
   # 2nd line
   set_color normal; set_color $color_sep
@@ -124,14 +121,19 @@ function fish_right_prompt
   if begin test -z $last_duration; or test $last_duration = 0; end
     return 0
   end
-  set_color $fishbowl_color_duration
+  set_color -u $fishbowl_color_duration
   printf '%s' (show-millisecond $last_duration)
+  set_color normal
+  printf ' '
   if test $last_status = 0
     set_color $fishbowl_color_status_success
-    printf ' ⏎ '
+    printf '⏎ '
   else
+    set_color -u $fishbowl_color_status_error
+    printf '%d' $last_status
+    set_color normal
     set_color $fishbowl_color_status_error
-    printf ' %d⏎ ' $last_status
+    printf '⏎ '
   end
   set_color normal
 end
