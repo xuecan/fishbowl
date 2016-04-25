@@ -13,7 +13,7 @@ set -g -x LESS '-F -g -i -M -R -S -w -X -z-4'
 begin
   set -l lesspipe (command -s lesspipe; or command -s lesspipe.sh)
   if test -n $lesspipe
-    set -g -x LESSOPEN "| $lesspipe %s"
+    set -g -x LESSOPEN "| $lesspipe %s ^ /dev/null"
   end
 end
 
