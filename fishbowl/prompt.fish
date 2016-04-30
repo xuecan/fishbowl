@@ -1,6 +1,8 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
+# Powerline Symbols: █       
+''
 
 set -g fishbowl_color_sep_root 870000
 set -g fishbowl_color_sep_user 005f5f
@@ -57,7 +59,7 @@ function fish_prompt
   echo
   # 1st line
   set_color normal; set_color $color_sep
-  printf '┏-['
+  printf '┌─['
   # username@hostname:path
   set_color -u
   set_color $color_user
@@ -86,11 +88,11 @@ function fish_prompt
   end
   # 2nd line
   set_color normal; set_color $color_sep
-  printf '\n┗'
+  printf '\n└'
   # python venv
   if test -n "$VIRTUAL_ENV"
     set_color normal; set_color $color_sep
-    printf '-['
+    printf '─['
     set_color $fishbowl_color_python
     printf '🐍 %s' (basename $VIRTUAL_ENV)
     set_color normal; set_color $color_sep
@@ -100,7 +102,7 @@ function fish_prompt
   set -l jobs_num (jobs | wc -l )
   if test $jobs_num -gt 0
     set_color normal; set_color $color_sep
-    printf '-['
+    printf '─['
     set_color $fishbowl_color_jobs
     printf '📍 %d' $jobs_num
     set_color normal; set_color $color_sep
@@ -108,7 +110,7 @@ function fish_prompt
   end
   # prompt
   set_color normal; set_color $color_sep
-  printf '→ '
+  printf '⇾ '
   set_color $color_user
   printf '%s ' $char_prompt
   set_color normal
