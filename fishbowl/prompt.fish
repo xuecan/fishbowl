@@ -2,7 +2,7 @@
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
 # Powerline Symbols: █       
-''
+
 
 set -g fishbowl_color_sep_root 870000
 set -g fishbowl_color_sep_user 005f5f
