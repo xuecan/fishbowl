@@ -32,7 +32,7 @@ def _slice(items):
 
 def _echo(items):
     for item in items:
-        print(item)
+        click.echo(click.format_filename(item))
 
 
 @click.group(context_settings=dict(help_option_names=['-h', '--help']))
