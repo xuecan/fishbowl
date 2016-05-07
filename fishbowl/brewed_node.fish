@@ -3,9 +3,9 @@
 
 # 使用 Homebrew 安装 node.js，并使用淘宝提供的镜像（通过 cnpm 命令）
 
-function reinstall-node --description='reinstall brewed node'
+function reinstall-node --description='reinstall brewed node4-lts'
   set -l brewed_packages (brew list)
-  if contains node $brewed_packages
+  if contains node4-lts $brewed_packages
     echo_and_eval cnpm uninstall -g gulp-cli
     echo_and_eval cnpm uninstall -g bower
     echo_and_eval cnpm uninstall -g node-gyp
