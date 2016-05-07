@@ -42,3 +42,13 @@ fishbowl_load_module brewed_python3
 fishbowl_load_module brewed_node
 fishbowl_load_module greeting
 fishbowl_load_module prompt
+
+# 临时使用的
+
+function rndc
+  command /usr/local/sbin/rndc -c /usr/local/etc/rndc.conf $argv
+end
+
+function namedcache
+  command cat /usr/local/var/named/named_dump.db
+end
