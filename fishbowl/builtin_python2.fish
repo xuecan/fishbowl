@@ -26,3 +26,8 @@ zip-ok = 0
 index-url = http://pypi.douban.com/simple/
 ' > $config_file
 end
+
+
+function pip2
+  command pip2 $argv --user
+end
