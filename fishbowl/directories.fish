@@ -2,10 +2,10 @@
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
 # shourtcuts for (../)*
-abbr -a ...="../../"
-abbr -a ....="../../../"
-abbr -a .....="../../../../"
-abbr -a ......="../../../../../"
+#abbr -a ...="../../"
+#abbr -a ....="../../../"
+#abbr -a .....="../../../../"
+#abbr -a ......="../../../../../"
 
 
 function _on_pwd_changed --on-variable PWD --description='on the current working directory changed'
