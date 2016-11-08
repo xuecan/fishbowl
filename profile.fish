@@ -33,6 +33,9 @@ set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PAT
 if test -d "$HOME/.local/bin"
   set -g -x PATH $HOME/.local/bin $PATH
 end
+if test -d "$HOME/.composer/vendor/bin"
+  set -g -x PATH $HOME/.composer/vendor/bin $PATH
+end
 set -g -x PATH (listutil rmdup $PATH)
 
 
