@@ -13,9 +13,9 @@ set -g fishbowl_pyvenv_dir "$HOME/.venv"
 function reinstall-python3 --description='reinstall brewed python3'
   set -l brewed_packages (brew list)
   if contains python3 $brewed_packages
-    echo_and_eval brew uninstall python3
+    echo-and-eval brew uninstall python3
   end
-  echo_and_eval brew install python3
+  echo-and-eval brew install python3
 end
 
 
@@ -86,7 +86,7 @@ function venv --description='create or enter a pyvenv'
     echo "You have about 5 seconds to press Ctrl-C to abort."
     set_color normal
     sleep 5
-    echo_and_eval (brew --prefix)/bin/pyvenv $dir
+    echo-and-eval (brew --prefix)/bin/pyvenv $dir
     source "$dir/bin/activate.fish"
   end
 
