@@ -3,7 +3,7 @@
 
 # 使用 Homebrew 安装 node.js，并使用淘宝提供的镜像（通过 cnpm 命令）
 
-function reinstall-node --description='reinstall brewed node4-lts'
+function reinstall-node --description='reinstall brewed node6-lts'
   set -l brewed_packages (brew list)
   if contains node6-lts $brewed_packages
     echo-and-eval cnpm uninstall -g gulp-cli
