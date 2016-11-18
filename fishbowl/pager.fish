@@ -11,17 +11,17 @@ set -g -x LESS '-F -g -i -M -R -S -w -X -z-4'
 # Set the Less input preprocessor.
 # Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
 begin
-  set -l lesspipe (command -s lesspipe; or command -s lesspipe.sh)
-  if test -n $lesspipe
-    set -g -x LESSOPEN "| $lesspipe %s ^ /dev/null"
-  end
+    set -l lesspipe (command -s lesspipe; or command -s lesspipe.sh)
+    if test -n $lesspipe
+        set -g -x LESSOPEN "| $lesspipe %s ^ /dev/null"
+    end
 end
 
 
 # Set the Less colorizer.
 begin
-  set -l pygmentize (command -s pygmentize)
-  set -g -x LESSCOLORIZER 'pygmentize'
+    set -l pygmentize (command -s pygmentize)
+    set -g -x LESSCOLORIZER 'pygmentize'
 end
 
 
