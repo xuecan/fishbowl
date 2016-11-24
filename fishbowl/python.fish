@@ -17,6 +17,11 @@ index-url = https://pypi.douban.com/simple/
 ' > $config_file
 end
 
+
+# virtual environments base directory
+set -g fishbowl_pyvenv_dir "$HOME/.venv"
+
+
 # venv 命令，用于快速的进入 python virtualenv 环境
 # 如果指定的 virtualenv 不存在（不在 ~/.venv 中），则创建之
 # 如果需要使用更多的 virtualenv 参数，如使用 -p 指定另外的 python 实例，
