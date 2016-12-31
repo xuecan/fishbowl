@@ -30,7 +30,7 @@ set -g -x PAGER 'less'
 
 # PATH 环境变量
 set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
-set -g -x PATH $HOME/Library/Python/3.5/bin $HOME/Library/Python/2.7/bin $PATH
+set -g -x PATH $HOME/Library/Python/3.6/bin $HOME/Library/Python/2.7/bin $PATH
 set -g -x PATH $HOME/.composer/vendor/bin $PATH
 # 将 ~/.local/bin 放在最前面
 set -g -x PATH $HOME/.local/bin $PATH
