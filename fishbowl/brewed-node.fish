@@ -12,7 +12,7 @@ function reinstall-node --description='reinstall brewed node'
         echo-and-eval cnpm uninstall -g node-gyp
         echo-and-eval brew uninstall node
     end
-    echo-and-eval brew install node@
+    echo-and-eval brew install node
     echo-and-eval npm install -g node-gyp
     echo-and-eval npm install -g bower
     echo-and-eval npm install -g gulp-cli
