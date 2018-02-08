@@ -91,7 +91,7 @@ function fish_prompt
     set -l vcs (__fish_git_prompt "%s")
     if test -n "$vcs"
         set_color normal; set_color $color_sep
-        printf '-{'
+        printf '─{'
         set_color $fishbowl_color_vcs
         printf '%s' $vcs
         set_color normal; set_color $color_sep
