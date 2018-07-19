@@ -2,6 +2,10 @@
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
 
+# Make less be the default pager.
+set -g -x PAGER 'less'
+
+
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
 # Remove -X and -F (exit if the content fits on one screen) to enable it.
@@ -21,7 +25,9 @@ end
 # Set the Less colorizer.
 begin
     set -l pygmentize (command -s pygmentize)
-    set -g -x LESSCOLORIZER 'pygmentize'
+    if test -n $pygmentize
+        set -g -x LESSCOLORIZER 'pygmentize'
+    end
 end
 
 

@@ -24,11 +24,14 @@ def convert(value):
         result = "%dh%dm%ds" % (hours, minutes, seconds)
     elif minutes:
         result = "%dm%ds" % (minutes, seconds)
+    elif seconds:
+        result = "%d.%03ds" % (seconds, milliseconds)
     else:
-        result = "%d.%03d" % (seconds, milliseconds)
+        result = "%dms" % milliseconds
 
     return result
 
 
 if __name__ == "__main__":
-    print(convert(int(sys.argv[1])))
+    if len(sys.argv) > 1:
+        print(convert(int(sys.argv[1])))

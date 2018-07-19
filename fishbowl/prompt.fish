@@ -4,12 +4,12 @@
 # Powerline Symbols: █       
 
 # fishbowl prompt color
-set -g fishbowl_color_sep_root 870000
-set -g fishbowl_color_sep_user 005f5f
-set -g fishbowl_color_user_root d70000
-set -g fishbowl_color_user_user ff8700
-set -g fishbowl_color_prompt_root d70000
-set -g fishbowl_color_prompt_user ff8700
+set -g fishbowl_color_sep_root 990000
+set -g fishbowl_color_sep_user cc6600
+set -g fishbowl_color_user_root cc0000
+set -g fishbowl_color_user_user ff9900
+set -g fishbowl_color_prompt_root cc0000
+set -g fishbowl_color_prompt_user ff9900
 set -g fishbowl_color_host 0087ff
 set -g fishbowl_color_path 00af00
 set -g fishbowl_color_python 878700
@@ -19,18 +19,34 @@ set -g fishbowl_color_status_success 00d700
 set -g fishbowl_color_status_error d70000
 
 # Fish git prompt
+# https://github.com/fish-shell/fish-shell/blob/master/share/functions/__fish_git_prompt.fish
 set -g __fish_git_prompt_showdirtystate 'yes'
 set -g __fish_git_prompt_showstashstate 'yes'
 set -g __fish_git_prompt_showuntrackedfiles 'yes'
 set -g __fish_git_prompt_showupstream 'yes'
 set -g __fish_git_prompt_show_informative_status 'yes'
 
+set -g __fish_git_prompt_char_cleanstate '✓'
+set -g __fish_git_prompt_char_dirtystate '❉ '
 set -g __fish_git_prompt_char_upstream_prefix ' '
-set -g __fish_git_prompt_char_upstream_ahead '⬆️ '
-set -g __fish_git_prompt_char_upstream_behind '⬇️ '
-set -g __fish_git_prompt_char_stateseparator ' '
-set -g __fish_git_prompt_char_dirtystate '🚧 '
-set -g __fish_git_prompt_char_untrackedfiles '🔸 '
+set -g __fish_git_prompt_char_upstream_ahead '↑ '
+set -g __fish_git_prompt_char_upstream_behind '↓ '
+set -g __fish_git_prompt_char_upstream_diverged '⇅'
+set -g __fish_git_prompt_char_stateseparator '|'
+set -g __fish_git_prompt_char_untrackedfiles ' ● '
+
+#__fish_git_prompt_set_char __fish_git_prompt_char_cleanstate '✔'
+#__fish_git_prompt_set_char __fish_git_prompt_char_dirtystate '*' '✚'
+#__fish_git_prompt_set_char __fish_git_prompt_char_invalidstate '#' '✖'
+#__fish_git_prompt_set_char __fish_git_prompt_char_stagedstate '+' '●'
+#__fish_git_prompt_set_char __fish_git_prompt_char_stashstate '$'
+#__fish_git_prompt_set_char __fish_git_prompt_char_stateseparator ' ' '|'
+#__fish_git_prompt_set_char __fish_git_prompt_char_untrackedfiles '%' '…'
+#__fish_git_prompt_set_char __fish_git_prompt_char_upstream_ahead '>' '↑'
+#__fish_git_prompt_set_char __fish_git_prompt_char_upstream_behind '<' '↓'
+#__fish_git_prompt_set_char __fish_git_prompt_char_upstream_diverged '⥮'
+#__fish_git_prompt_set_char __fish_git_prompt_char_upstream_equal '='
+#__fish_git_prompt_set_char __fish_git_prompt_char_upstream_prefix ''
 
 set -g __fish_git_prompt_color_branch af00ff
 set -g __fish_git_prompt_color_upstream 00afff
@@ -39,12 +55,12 @@ set -g __fish_git_prompt_color_untrackedfiles ffaf5f
 set -g __fish_git_prompt_color_cleanstate 5fff87
 
 
-function prompt_pwd --description 'Print the current working directory, shortened to fit the prompt'
-    set -l args_post
-    set -l args_pre -e 's|^/private/|/|'
-    set -l realhome ~
-    echo $PWD | /usr/bin/sed -e "s|^$realhome|~|" $args_pre -e 's-\([^/.]\)[^/]{3}/-\1/-g' $args_post
-end
+#function prompt_pwd --description 'Print the current working directory, shortened to fit the prompt'
+#    set -l args_post
+#    set -l args_pre -e 's|^/private/|/|'
+#    set -l realhome ~
+#    echo $PWD | /usr/bin/sed -e "s|^$realhome|~|" $args_pre -e 's-\([^/.]\)[^/]{3}/-\1/-g' $args_post
+#end
 
 
 function fish_prompt
@@ -59,18 +75,18 @@ function fish_prompt
         set color_sep $fishbowl_color_sep_root
         set color_user $fishbowl_color_user_root
         set color_prompt $fishbowl_color_prompt_root
-        set char_prompt '#'
+        set char_prompt '▸'
     case '*'
         set color_sep $fishbowl_color_sep_user
         set color_user $fishbowl_color_user_user
         set color_prompt $fishbowl_color_prompt_user
-        set char_prompt '$'
+        set char_prompt '▸'
     end
 
     echo
     # 1st line
     set_color normal; set_color $color_sep
-    printf '┌─['
+    printf '┌['
     # username@hostname:path
     set_color -u
     set_color $color_user
@@ -91,12 +107,13 @@ function fish_prompt
     set -l vcs (__fish_git_prompt "%s")
     if test -n "$vcs"
         set_color normal; set_color $color_sep
-        printf '─{'
+        printf '─['
         set_color $fishbowl_color_vcs
         printf '%s' $vcs
         set_color normal; set_color $color_sep
-        printf '}'
+        printf ']'
     end
+    printf \e'[0K'  # clear to EOL
     # 2nd line
     set_color normal; set_color $color_sep
     printf '\n└'
@@ -105,7 +122,7 @@ function fish_prompt
         set_color normal; set_color $color_sep
         printf '─['
         set_color $fishbowl_color_python
-        printf '🐍 %s' (basename $VIRTUAL_ENV)
+        printf '🐍 \b%s' (basename $VIRTUAL_ENV)
         set_color normal; set_color $color_sep
         printf ']'
     end
@@ -115,13 +132,13 @@ function fish_prompt
         set_color normal; set_color $color_sep
         printf '─['
         set_color $fishbowl_color_jobs
-        printf '📍 %d' $jobs_num
+        printf '📌 \b%d' $jobs_num
         set_color normal; set_color $color_sep
         printf ']'
     end
     # prompt
     set_color normal; set_color $color_sep
-    printf '⇾ '
+    printf '─'
     set_color $color_user
     printf '%s ' $char_prompt
     set_color normal
