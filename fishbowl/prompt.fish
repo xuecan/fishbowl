@@ -43,7 +43,7 @@ function prompt_pwd --description 'Print the current working directory, shortene
     set -l args_post
     set -l args_pre -e 's|^/private/|/|'
     set -l realhome ~
-    echo $PWD | sed -e "s|^$realhome|~|" $args_pre -e 's-\([^/.]\)[^/]{3}/-\1/-g' $args_post
+    echo $PWD | /usr/bin/sed -e "s|^$realhome|~|" $args_pre -e 's-\([^/.]\)[^/]{3}/-\1/-g' $args_post
 end
 
 
@@ -54,7 +54,7 @@ function fish_prompt
     set -l color_user
     set -l color_prompt
     set -l char_prompt
-    switch (whoami)
+    switch (/usr/bin/whoami)
     case root toor
         set color_sep $fishbowl_color_sep_root
         set color_user $fishbowl_color_user_root
@@ -74,11 +74,11 @@ function fish_prompt
     # username@hostname:path
     set_color -u
     set_color $color_user
-    printf '%s' (whoami)
+    printf '%s' (/usr/bin/whoami)
     set_color $color_sep
     printf '@'
     set_color $fishbowl_color_host
-    printf '%s' (hostname|cut -d . -f 1)
+    printf '%s' (/bin/hostname | /usr/bin/cut -d . -f 1)
     set_color normal;
     set_color $color_sep
     printf ':'
@@ -110,7 +110,7 @@ function fish_prompt
         printf ']'
     end
     # jobs
-    set -l jobs_num (jobs | wc -l )
+    set -l jobs_num (jobs | /usr/bin/wc -l )
     if test $jobs_num -gt 0
         set_color normal; set_color $color_sep
         printf '─['

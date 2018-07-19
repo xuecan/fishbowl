@@ -36,9 +36,12 @@ def _echo(items):
 
 
 @click.group(context_settings=dict(help_option_names=['-h', '--help']))
-@click.option('--limit', '-l', default=0, help='Limit tems count.')
-@click.option('--offset', '-o', default=1, help='Offset of items, starts at 1.')
-@click.option('--reverse', '-r', is_flag=True, help='Reverses items.')
+@click.option('--limit', '-l', default=0,
+              help='Limit items count.')
+@click.option('--offset', '-o', default=1,
+              help='Offset of items, starts at 1.')
+@click.option('--reverse', '-r', is_flag=True,
+              help='Reverses items.')
 def main(**kwargs):
     for key in kwargs:
         setting_key = key.replace('_', '-').upper()

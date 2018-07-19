@@ -9,13 +9,14 @@
 ~           ;_/"`.__.-"                                               .
 ```
 
-Fish shell 配置。
+自用的一套 [Fish](https://fishshell.com/) shell 配置。
+
 
 ## 安装 fish
 
-如果尚未安装 fish，在 OS X 中：
+在 macOS 中，使用 [Homebrew](https://brew.sh/) 安装 fish：
 
-```sh
+```bash
 brew install fish
 ```
 
@@ -32,7 +33,7 @@ brew install fish
 目录（如果存在的话）。随后，将这个目录中的 `fishbowl`、`functions` 目录以及
 `config.fish`、`profile.fish` 文件在 `~/.config/fish` 中建立符号链接：
 
-```sh
+```bash
 ln -s /path/to/this/folder/functions ~/.config/fish
 ln -s /path/to/this/folder/fishbowl ~/.config/fish
 ln -s /path/to/this/folder/profile.fish ~/.config/fish

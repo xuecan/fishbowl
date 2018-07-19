@@ -42,3 +42,16 @@ fishbowl-load-module python
 fishbowl-load-module brewed-node
 fishbowl-load-module greeting
 fishbowl-load-module prompt
+
+# 启用 direnv
+eval (direnv hook fish)
+
+
+# The next line updates PATH for the Google Cloud SDK.
+#if [ -f '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc' ];
+#    if type source > /dev/null;
+#        source '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
+#    else;
+#        . '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
+#    end;
+#end

@@ -3,29 +3,32 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
+from __future__ import print_function
 import sys
 
 
 def convert(value):
-    if value < 1000:
-        return '%dms' % value
-    ms = value % 1000
-    value = value / 1000
-    if value < 60:
-        return '%d.%03ds' % (value, ms)
-    sec = value % 60
-    value = value / 60
-    if value < 60:
-        return '%dm%ds' % (value, sec)
-    minute = value % 60
-    value = value / 60
-    return '%dh%dm%ds' % (value, minute, sec)
+    """Convert value in milliseconds to a string."""
+    milliseconds = value % 1000
+    value = value // 1000
+    seconds = value % 60
+    value = value // 60
+    minutes = value % 60
+    value = value // 60
+    hours = value % 24
+    value = value // 24
+    days = value
+    if days:
+        result = "%dd%dh%dm" % (days, hours, minutes)
+    elif hours:
+        result = "%dh%dm%ds" % (hours, minutes, seconds)
+    elif minutes:
+        result = "%dm%ds" % (minutes, seconds)
+    else:
+        result = "%d.%03d" % (seconds, milliseconds)
+
+    return result
 
 
-def main(value):
-    value = int(value)
-    print convert(value)
-
-
-if __name__ == '__main__':
-    main(sys.argv[1])
+if __name__ == "__main__":
+    print(convert(int(sys.argv[1])))

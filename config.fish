@@ -35,3 +35,12 @@ fishbowl-load-module pager terminal directories
 
 # load profile.fish
 source "$fishbowl_basedir/profile.fish"
+
+# The next line updates PATH for the Google Cloud SDK.
+#if [ -f '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc' ];
+#    if type source > /dev/null;
+#        source '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
+#    else;
+#        . '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
+#    end;
+#end
