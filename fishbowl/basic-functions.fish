@@ -10,12 +10,12 @@ end
 
 
 function listutil -d "invoke `listutil.py'"
-  eval "$fishbowl_basedir/listutil.py $argv"
+  eval "$FISHBOWL_BASEDIR/listutil.py $argv"
   return $status
 end
 
 
 function show-millisecond -d "invoke `show-millisecond.py'"
-  eval "$fishbowl_basedir/show-millisecond.py $argv"
+  eval "$FISHBOWL_BASEDIR/show-millisecond.py $argv"
   return $status
 end

@@ -2,28 +2,28 @@
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
 
-# session id
-if test -z $fishbow_session_id
-    set -g fishbow_session_id (uuidgen)
+# a global but not universal session id
+if test -z "$FISHBOW_SESSION_ID"
+    set -g -x FISHBOW_SESSION_ID (uuidgen)
 end
 
 
-# this directory
-set -g fishbowl_basedir (dirname (status -f))"/fishbowl"
+# the `fishbowl' directory
+set -g -x FISHBOWL_BASEDIR (dirname (status -f))"/fishbowl"
 
 
 # reload this config file
 function reload-config --description='reload this config file'
     set -l filename (status -f)
     source $filename
-    echo '"'$filename'" reloaded.'
+    printf '"%s" reloaded.' $filename
 end
 
 
 # load fishbowl module
 function fishbowl-load-module --description='load fishbowl module'
     for modulename in $argv
-        set -l filename "$fishbowl_basedir/$modulename.fish"
+        set -l filename "$FISHBOWL_BASEDIR/$modulename.fish"
         source $filename
     end
 end
@@ -35,5 +35,5 @@ fishbowl-load-module pager terminal directories
 
 
 # load profile.fish
-source "$fishbowl_basedir/../profile.fish"
+source "$FISHBOWL_BASEDIR/../profile.fish"
 
