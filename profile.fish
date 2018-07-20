@@ -47,7 +47,9 @@ fishbowl-load-module greeting
 fishbowl-load-module prompt
 
 # 启用 direnv
-eval (direnv hook fish)
+if type -p direnv > /dev/null
+    eval (direnv hook fish)
+end
 
 # Googlw Cloud SDK
 begin
