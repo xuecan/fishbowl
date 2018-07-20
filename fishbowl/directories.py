@@ -175,6 +175,7 @@ def _output_selected(items, ch):
         index = CHARS.index(ch)
         if index >= 0 and index < len(items):
             return _unshorten_dirname(items[index])
+    return PWD
 
 
 def select_directory():
