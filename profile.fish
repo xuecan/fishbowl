@@ -26,10 +26,17 @@ end
 
 # PATH 环境变量
 set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
-set -g -x PATH $HOME/Library/Python/3.6/bin $HOME/Library/Python/2.7/bin $PATH
-set -g -x PATH $HOME/.composer/vendor/bin $PATH
-# 将 ~/.local/bin 放在最前面
-set -g -x PATH $HOME/.local/bin $PATH
+
+begin
+    # 如果这些路径存在，则加在 $PATH 最前，因此这个列表越后面的路径将被加在越前面
+    set -l extra_paths $HOME/.composer/vendor/bin $HOME/Library/Python/2.7/bin $HOME/Library/Python/3.6/bin $HOME/.local/bin
+    for _path in $extra_paths
+        if test -d $_path
+            set -g -x PATH $_path $PATH
+        end
+    end
+end
+
 set -g -x PATH (listutil rmdup $PATH)
 
 
@@ -42,12 +49,10 @@ fishbowl-load-module prompt
 # 启用 direnv
 eval (direnv hook fish)
 
-
-# The next line updates PATH for the Google Cloud SDK.
-#if [ -f '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc' ];
-#    if type source > /dev/null;
-#        source '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
-#    else;
-#        . '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc';
-#    end;
-#end
+# Googlw Cloud SDK
+begin
+    set -l filename '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc'
+    if test -f $filename
+        source $filename
+    end
+end

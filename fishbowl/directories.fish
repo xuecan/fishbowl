@@ -1,24 +1,29 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
-# cd shourtcuts
-abbr -a -- - 'cd -'
-abbr -a -- ... 'cd ../../'
-abbr -a -- .... 'cd ../../../'
-abbr -a -- ..... 'cd ../../../../'
-abbr -a -- ...... 'cd ../../../../../'
+
+function register_directory_abbrs --description='register abbrs'
+    abbr -a -- - 'cd -'
+    abbr -a -- ... 'cd ../../'
+    abbr -a -- .... 'cd ../../../'
+    abbr -a -- ..... 'cd ../../../../'
+    abbr -a -- ...... 'cd ../../../../../'
+    abbr -a -- d 'directories'
+end
 
 
-set -U fishbowl_dirs_size 500
-
-if not set -qU fishbowl_dirs
-    set -U fishbowl_dirs $PWD
+function unregister_directory_abbrs --description='unregister abbrs'
+    abbr -e -- -
+    abbr -e -- ...
+    abbr -e -- ....
+    abbr -e -- .....
+    abbr -e -- ......
+    abbr -e -- d
 end
 
 
 function _on_pwd_changed --on-variable PWD --description='on the current working directory changed'
-    set -U fishbowl_dirs $PWD $fishbowl_dirs
-    set -q fishbowl_dirs[$fishbowl_dirs_size] and set -e fishbowl_dirs[1]
+    eval "$FISHBOWL_BASEDIR/directories.py $PWD"
 end
 
 
@@ -35,13 +40,11 @@ end
 function directories --description='directories'
     set -l tmp (__invoke_directories)
     if test -n $tmp
-        echo $tmp
-        cd $tmp
+        if test "$PWD" != "$tmp"
+            cd $tmp
+        end
     end
 end
-
-abbr -a -- d 'directories'
-
 
 
 #function d --description='list recently visited directories'
