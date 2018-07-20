@@ -29,12 +29,11 @@ brew install fish
 
 建议在 github 上 fork 这个仓库。
 
-首先，备份当前 `~/.config/fish` 目录中的 `config.fish` 文件和 `functions`
-目录（如果存在的话）。随后，将这个目录中的 `fishbowl`、`functions` 目录以及
-`config.fish`、`profile.fish` 文件在 `~/.config/fish` 中建立符号链接：
+首先，备份当前 `~/.config/fish` 目录中的 `config.fish` 文件。随后，将这个目录中的
+`fishbowl`  目录以及 `config.fish`、`profile.fish` 文件在
+`~/.config/fish` 中建立符号链接：
 
 ```bash
-ln -s /path/to/this/folder/functions ~/.config/fish
 ln -s /path/to/this/folder/fishbowl ~/.config/fish
 ln -s /path/to/this/folder/profile.fish ~/.config/fish
 ln -s /path/to/this/folder/config.fish ~/.config/fish
