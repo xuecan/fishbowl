@@ -14,7 +14,7 @@ set -g -x FISHBOWL_BASEDIR (dirname (status -f))"/fishbowl"
 
 # reload this config file
 function reload-config --description='reload this config file'
-    set -l filename (status -f)
+    set -l filename (status filename)
     source $filename
     printf '"%s" reloaded.\n' $filename
 end
@@ -35,4 +35,6 @@ fishbowl-load-module pager directories
 
 
 # load profile.fish
+set -g _fishbowl_not_trace_dir 'yes'
 source "$FISHBOWL_BASEDIR/../profile.fish"
+set -g -e _fishbowl_not_trace_dir

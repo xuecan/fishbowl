@@ -23,7 +23,9 @@ end
 
 
 function _on_pwd_changed --on-variable PWD --description='on the current working directory changed'
-    eval "$FISHBOWL_BASEDIR/directories.py $PWD"
+    if not set -q _fishbowl_not_trace_dir
+        eval "$FISHBOWL_BASEDIR/directories.py $PWD"
+    end
 end
 
 
@@ -38,11 +40,17 @@ end
 
 
 function directories --description='directories'
-    set -l tmp (__invoke_directories)
-    if test -n $tmp
-        if test "$PWD" != "$tmp"
-            cd $tmp
+    if test -z "$argv"
+        set -l tmp (__invoke_directories)
+        if test -n "$tmp"
+            printf '>>%s<<' $tmp
+            if test "$PWD" != "$tmp"
+                cd $tmp
+            end
         end
+    else
+        eval "$FISHBOWL_BASEDIR/directories.py $argv"
+        return $status
     end
 end
 

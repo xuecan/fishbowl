@@ -15,9 +15,11 @@ import time
 import marshal
 
 from os import path
+from decimal import getcontext, Decimal
 from click import echo, style, getchar, get_app_dir, command, argument
 
 
+DEBUG = False
 NOW = time.time()
 PWD = os.getcwd()
 HOME = os.path.expanduser('~')
@@ -25,14 +27,15 @@ CHARS = "0123456789abcdefghijklmnopqrstuvwxyz"
 APP_DIR = get_app_dir('fishbowl', force_posix=True)
 DATA_FILE = path.join(APP_DIR, "data")
 
+getcontext().prec = 2
 CONF = {
     "LEVELS": [
-        (1, 1.0),
-        (3, 0.8),
-        (7, 0.5),
-        (30, 0.3),
-        (90, 0.2),
-        (365, 0.1)
+        (1, Decimal(1.0)),
+        (3, Decimal(0.8)),
+        (7, Decimal(0.5)),
+        (30, Decimal(0.3)),
+        (90, Decimal(0.2)),
+        (365, Decimal(0.1)),
     ],
     "ITEMS": 10000,
 }
@@ -40,6 +43,12 @@ CONF = {
 
 if not path.exists(APP_DIR):
     os.makedirs(APP_DIR)
+
+
+def debug(msg):
+    if not DEBUG:
+        return
+    print(msg, file=sys.stderr)
 
 
 def _shorten_dirname(name):
@@ -105,6 +114,20 @@ def clear_data():
         pass
 
 
+def remove(*directories):
+    data = _load_data()
+    items = list()
+    for item in data:
+        keep = True
+        for dirname in directories:
+            if dirname == item[1]:
+                keep = False
+                break
+        if keep:
+            items.append(item)
+    _save_data(items)
+
+
 def _key_func(num):
     if num > 0:
         return 1
@@ -119,7 +142,7 @@ def _calc_weight(data):
         timestamp, dirname = item
         if not path.exists(dirname):
             continue
-        weight = 0
+        weight = Decimal(0)
         for level in CONF["LEVELS"]:
             if timestamp > (NOW - level[0] * 86400):
                 weight = level[1]
@@ -127,10 +150,11 @@ def _calc_weight(data):
         if dirname in registry:
             registry[dirname] += weight
         else:
-            registry[dirname] = weight
+            registry[dirname] = 0 + weight
     result = sorted(registry,
                     lambda x, y: _key_func(registry[x] - registry[y]),
                     reverse=True)
+    debug(registry)
     return result
 
 
@@ -191,12 +215,15 @@ def select_directory():
 
 @command(context_settings=dict(help_option_names=['-h', '--help']))
 @argument("directory", default="")
+@argument("extras", nargs=-1)
 def main(**kwargs):
     "Directories util"
     if kwargs["directory"]:
         directory = kwargs["directory"]
-        if directory == "<clear>":
+        if directory == "clear":
             clear_data()
+        elif directory == "remove":
+            remove(*kwargs["extras"])
         else:
             remember(directory)
     else:
