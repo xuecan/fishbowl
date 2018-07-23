@@ -27,6 +27,11 @@ end
 # PATH 环境变量
 set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
 
+if type -p go
+    set -g -x GOROOT (go env GOROOT)
+    set -g -x PATH $GOROOT/bin $PATH
+end
+
 begin
     # 如果这些路径存在，则加在 $PATH 最前，因此这个列表越后面的路径将被加在越前面
     set -l extra_paths $HOME/.composer/vendor/bin $HOME/Library/Python/2.7/bin $HOME/Library/Python/3.6/bin $HOME/.local/bin
