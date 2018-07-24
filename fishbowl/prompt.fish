@@ -12,7 +12,6 @@ set -g fishbowl_color_prompt_root cc0000
 set -g fishbowl_color_prompt_user bdc3c7
 set -g fishbowl_color_host 0087ff
 set -g fishbowl_color_path 00af00
-set -g fishbowl_color_python 878700
 set -g fishbowl_color_php 6666ff
 set -g fishbowl_color_node 00cc00
 set -g fishbowl_color_jobs ffff00
@@ -113,11 +112,24 @@ function fish_prompt
     # python venv
     if test -n "$VIRTUAL_ENV"
         set_color normal; set_color $color_sep
-        printf -- '['
-        set_color $fishbowl_color_python
-        printf '%s' (basename $VIRTUAL_ENV)
+        printf -- ' '
+        set_color -b 2980b9; set_color f1c40f
+        if set -q PIPENV_ACTIVE
+            printf ' Pipenv '
+        else
+            printf ' %s ' (basename $VIRTUAL_ENV)
+        end
         set_color normal; set_color $color_sep
-        printf ']'
+        printf ' '
+    end
+    # node alternative
+    if test -n "$USE_NODE"
+        set_color normal; set_color $color_sep
+        printf -- ' '
+        set_color -b 27ae60; set_color f0f0f0
+        printf ' %s ' $USE_NODE
+        set_color normal; set_color $color_sep
+        printf ' '
     end
 
     #begin
