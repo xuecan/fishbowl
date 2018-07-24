@@ -27,13 +27,13 @@ end
 # PATH 环境变量
 set -g -x PATH /usr/local/bin /usr/bin /bin /usr/local/sbin /usr/sbin /sbin $PATH
 
-if type -p go
-    set -g -x GOROOT (go env GOROOT)
-    set -g -x PATH $GOROOT/bin $PATH
-end
+#if type -p go > /dev/null
+#    set -g -x GOROOT (go env GOROOT)
+#    set -g -x PATH $GOROOT/bin $PATH
+#end
 
 begin
-    # 如果这些路径存在，则加在 $PATH 最前，因此这个列表越后面的路径将被加在越前面
+    # 如果这些路径存在，则**依次**加在 $PATH 最前，因此这个列表越后面的路径将被加在越前面
     set -l extra_paths $HOME/.composer/vendor/bin $HOME/Library/Python/2.7/bin $HOME/Library/Python/3.6/bin $HOME/.local/bin
     for _path in $extra_paths
         if test -d $_path
@@ -42,6 +42,7 @@ begin
     end
 end
 
+# 移除 $PATH 中重复的项
 set -g -x PATH (listutil rmdup $PATH)
 
 
@@ -58,7 +59,7 @@ end
 
 # Googlw Cloud SDK
 begin
-    set -l filename '/Users/xuecan/Downloads/google-cloud-sdk/path.fish.inc'
+    set -l filename $HOME'/Downloads/google-cloud-sdk/path.fish.inc'
     if test -f $filename
         source $filename
     end
