@@ -1,6 +1,12 @@
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
+# 命令提示符
+# 调色板源自 https://flatuicolors.com/palette/defo
+# Git 状态全开
+# 显示上一条命令执行时间以及返回状态（非 0 时）
+# 提示符灵感源自《海底总动员》的小丑鱼
+
 # Powerline Symbols: █       
 
 # fishbowl prompt color
@@ -67,12 +73,12 @@ function fish_prompt
         set color_sep $fishbowl_color_sep_root
         set color_user $fishbowl_color_user_root
         set color_prompt $fishbowl_color_prompt_root
-        set char_prompt '><((("▸'
+        set char_prompt '#'
     case '*'
         set color_sep $fishbowl_color_sep_user
         set color_user $fishbowl_color_user_user
         set color_prompt $fishbowl_color_prompt_user
-        set char_prompt '><(((">'
+        set char_prompt '$'  # ▸
     end
 
     echo
@@ -164,9 +170,27 @@ function fish_prompt
     end
     # prompt
     set_color normal; set_color $color_sep
-    printf -- ' '
+    printf ' '
+
+    # 小丑鱼
+    set_color f39c12
+    printf '>'
+    set_color ffffff
+    printf '<'
+    set_color f39c12
+    printf '('
+    set_color ffffff
+    printf '('
+    set_color f39c12
+    printf '('
+    set_color ffffff
+    printf '"'
+    set_color f39c12
+    printf '>'
+
     set_color $color_prompt
     printf '%s ' $char_prompt
+
     set_color normal
     printf \e'[0K'  # clear to EOL
 end
