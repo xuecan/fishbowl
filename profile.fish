@@ -5,6 +5,7 @@
 # 默认使用 en_US.UTF-8 能够避免很多问题
 #if test -z "$LANG"
     set -g -x LANG 'en_US.UTF-8'
+    set -g -x LC_CTYPE 'en_US.UTF-8'
 #end
 
 
