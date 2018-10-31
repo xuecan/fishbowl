@@ -24,7 +24,8 @@ end
 
 function _on_pwd_changed --on-variable PWD --description='on the current working directory changed'
     if not set -q _fishbowl_not_trace_dir
-        eval "$FISHBOWL_BASEDIR/directories.py $PWD"
+        set -l quoted (string escape $PWD)
+        eval "$FISHBOWL_BASEDIR/directories.py $quoted"
     end
 end
 
