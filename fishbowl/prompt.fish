@@ -121,7 +121,7 @@ function fish_prompt
         printf -- ' '
         set_color -b 2980b9; set_color f1c40f
         if set -q PIPENV_ACTIVE
-            printf ' Pipenv '
+            printf ' Pipenv shell '
         else
             printf ' %s ' (basename $VIRTUAL_ENV)
         end
