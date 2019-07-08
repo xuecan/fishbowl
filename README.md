@@ -34,11 +34,17 @@ brew install fish
 `~/.config/fish` 中建立符号链接：
 
 ```bash
-ln -s /path/to/this/folder/fishbowl ~/.config/fish
-ln -s /path/to/this/folder/profile.fish ~/.config/fish
-ln -s /path/to/this/folder/config.fish ~/.config/fish
+mkdir -p ~/.config/fish
+ln -s $PWD/clownfish ~/.config/fish
+ln -s $PWD/config.fish ~/.config/fish
 ```
 
-根据实际需要修改 `~/.config/fish/profile.fish`。
+根据实际需要修改 `~/.config/fish/config.fish`。
 
 执行 `source ~/.config/fish/config.fish`，可以开始使用 fishbowl。
+
+## 路径
+
+基于 `~/.path.conf`
+
+
