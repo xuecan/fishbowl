@@ -4,8 +4,13 @@
 # bootstrap the `clownfish`
 source $HOME/.config/fish/clownfish/bootstrap.fish
 
+
 # modules
 clownfish_load_module pager
 clownfish_load_module autojump
+clownfish_load_module z
 clownfish_load_module direnv
 clownfish_load_module dir_aliases
+
+clownfish_load_module greeting
+clownfish_load_module prompt

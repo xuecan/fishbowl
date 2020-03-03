@@ -18,6 +18,7 @@ begin
     set -l lesspipe (command -s lesspipe; or command -s lesspipe.sh)
     if test -n $lesspipe
         set -g -x LESSOPEN "| $lesspipe %s ^ /dev/null"
+        set -g -x LESS_ADVANCED_PREPROCESSOR 1
     end
 end
 

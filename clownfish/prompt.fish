@@ -203,7 +203,7 @@ function fish_right_prompt
         return 0
     end
     set_color -u $fishbowl_color_duration
-    printf '%s' (show-millisecond $last_duration)
+    printf '%s' (show_time_interval $last_duration)
     set_color normal
     printf ' '
     if test $last_status = 0

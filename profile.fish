@@ -1,3 +1,5 @@
+# 已废弃
+
 # Copyright (C) 2016 Xue Can <xuecan@gmail.com> and contributors.
 # Licensed under the MIT license: http://opensource.org/licenses/mit-license
 
@@ -32,21 +34,9 @@
 # fishbowl 提供的额外模块
 #fishbowl-load-module python
 #fishbowl-load-module brewed-node
-fishbowl-load-module greeting
-fishbowl-load-module prompt
+#fishbowl-load-module greeting
+#fishbowl-load-module prompt
 
-# 使用 brew install autojup 安装的 autojump 工具
-# begin
-#     set -l filename '/usr/local/share/autojump/autojump.fish'
-#     if test -f $filename
-#         source $filename
-#     end
-# end
-
-# 启用 direnv
-# if type -p direnv > /dev/null
-#     eval (direnv hook fish)
-# end
 
 # 使用 brew cask install google-cloud-sdk 安装了 Google Cloud SDK
 # begin
